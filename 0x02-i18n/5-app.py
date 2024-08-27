@@ -4,8 +4,7 @@
 Basic Flask app
 """
 
-import flask
-from flask import Flask, render_template, request
+from flask import Flask, g, render_template, request
 from flask_babel import Babel
 
 
@@ -57,7 +56,7 @@ def before_request():
     Function that is executed before each request is processed.
     It sets the 'user' attribute in the flask.g object to the current user.
     """
-    flask.g.user = get_user()
+    g.user = get_user()
 
 
 @babel.localeselector
