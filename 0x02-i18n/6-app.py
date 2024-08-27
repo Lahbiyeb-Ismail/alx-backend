@@ -68,9 +68,9 @@ def get_locale():
     if url_locale in Config.LANGUAGES:
         return url_locale
 
-    user_locale = g.user.get("loacale")
-    if user_locale in Config.LANGUAGES:
-        return user_locale
+    user = g.user
+    if user and user.get("locale") in Config.LANGUAGES:
+        return user.get("locale")
 
     header_locale = request.headers.get("locale")
     if header_locale in Config.LANGUAGES:
