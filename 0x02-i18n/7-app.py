@@ -4,6 +4,7 @@
 Basic Flask app
 """
 
+import pytz
 from flask import Flask, g, render_template, request
 from flask_babel import Babel
 
@@ -79,6 +80,25 @@ def get_locale():
     return request.accept_languages.best_match(["LANGUAGES"])
 
 
+@babel.timezoneselector
+def get_timezone():
+    """
+    Get the timezone based on the user's input or the default timezone.
+
+    Returns:
+      str: The timezone string.
+    """
+
+    timezone = request.args.get("timezone")
+
+    if not timezone and g.user:
+        timezone = g.user["timezone"]
+    try:
+        return pytz.timezone(timezone).zone
+    except pytz.exceptions.UnknownTimeZoneError:
+        return Config.BABEL_DEFAULT_TIMEZONE
+
+
 @app.route("/")
 def index():
     """
@@ -87,7 +107,7 @@ def index():
     Returns:
       The rendered index.html template.
     """
-    return render_template("6-index.html")
+    return render_template("7-index.html")
 
 
 if __name__ == "__main__":
