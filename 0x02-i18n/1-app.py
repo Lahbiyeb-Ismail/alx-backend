@@ -9,17 +9,28 @@ from flask_babel import Babel
 
 
 class Config:
+    """
+    Configuration class for the application.
+
+    Attributes:
+      LANGUAGES (list): A list of supported languages for the application.
+      BABEL_DEFAULT_LOCALE (str): The default locale for the application.
+      BABEL_DEFAULT_TIMEZONE (str): The default timezone for the application.
+    """
+
     LANGUAGES = ["en", "fr"]
-    DEFAULT_LOCALE = "en"
-    DEFAULT_TIMEZONE = "UTC"
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.url_map.strict_slashes = False
+
 babel = Babel(app)
 
 
-@app.route("/", strict_slashes=False)
+@app.route("/")
 def index():
     """
     Renders the index.html template.
