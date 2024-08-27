@@ -50,7 +50,7 @@ def get_user():
     return None
 
 
-@app.defore_request
+@app.before_request
 def before_request():
     """
     Function that is executed before each request is processed.
