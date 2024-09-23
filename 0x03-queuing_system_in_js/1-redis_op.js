@@ -6,12 +6,12 @@ client.on('error', (err) => console.log('Redis client not connected to the serve
 
 client.on('connect', () => console.log('Redis client connected to the server'));
 
-function setNewSchool(schooleName, value) {
-  client.SET(schooleName, value, print);
+function setNewSchool(schoolName, value) {
+  client.SET(schoolName, value, print);
 }
 
-async function displaySchoolValue(schooleName) {
-  client.GET(schooleName, (_err, reply) => console.log(reply));
+function displaySchoolValue(schoolName) {
+  client.GET(schoolName, (_err, reply) => console.log(reply));
 }
 
 displaySchoolValue('Holberton');
